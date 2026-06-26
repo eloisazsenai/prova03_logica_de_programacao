@@ -67,7 +67,7 @@ const listLotes = () => {
             <b>Comprimento:</b> ${elem.comprimento}m <br>
             <b>Largura:</b> ${elem.largura}m (${area} m²) <br>
             <b>Área:</b> ${areaLote(elem).toFixed(1)}m²<br>
-            <b>Valor lote:</b> R$${(areaLote(elem) * 550).toFixed(2)}<br>
+            <b>Valor do lote:</b> R$${(areaLote(elem) * 550).toFixed(2)}<br>
             <b>Adicional:</b> ${adicional} <br>
             <br>
         `
