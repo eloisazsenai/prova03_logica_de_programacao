@@ -4,34 +4,72 @@ const divListaLotes = document.querySelector('#div-lista-lotes')
 const lotes = []
 
 formLotes.addEventListener('submit', (evt)=>{
-    evt.defaultPrevented()
+    evt.preventDefault()
 
     const dadosFormLotes = new FormData(formLotes)
 
-    const lote={
+    const lote = {
         descricao: dadosFormLotes.get('descricao'),
-        comprimento: dadosFormLotes.get('comprimento'),
-        largura: dadosFormLotes.get('largura'),
+        comprimento: Number(dadosFormLotes.get('comprimento')),
+        largura: Number(dadosFormLotes.get('largura')),
     }
 
-    //CHAMAR FUNCAO addLote
-
+    // CHAMAR FUNCAO addLote
+    addLote(lote)
 
     formLotes.reset()
 })
 
-//FUNÇÃO ADICIONAR LOTES
-const addLote = (objLote) =>{
+// FUNÇÃO ADICIONAR LOTES
+const addLote = (objLote) => {
     lotes.push(objLote)
 
-    //CHAMAR FUNÇÃO listLotes
+    // CHAMAR FUNÇÃO listLotes
+    listLotes()
 }
 
-//FUNÇÃO PERCORRER ARRAY lotes
-const listLotes = ()=>{
+// FUNÇÃO CALCULAR ÁREA DO LOTE
+const areaLote = function(objLote){
+    return objLote.comprimento * objLote.largura
+}
+
+// FUNÇÃO VALOR ADICIONAL
+const resultValorAdicional = (objtLote) => {
+    let resultado = ''
+
+    const valorBase = areaLote(objtLote) * 550 
+
+    if (valorBase <= 20000) {
+        resultado = 'Isento de valor adicional'
+    } else if (valorBase <= 100000) {
+        resultado = `R$ ${(valorBase * 0.05).toFixed(2)}`
+    } else if (valorBase <= 500000) {
+        resultado = `R$ ${(valorBase * 0.10).toFixed(2)}`
+    } else if (valorBase <= 1000000) {
+        resultado = `R$ ${(valorBase * 0.15).toFixed(2)}`
+    } else { 
+        resultado = `R$ ${(valorBase * 0.20).toFixed(2)}`
+    }
+    
+    return resultado
+}
+
+// FUNÇÃO PERCORRER ARRAY
+const listLotes = () => {
     divListaLotes.innerHTML = ''
 
-    lotes.forEach((elem, i)=>{
-        divListaLotes.innerHTML += `${i+1} - ${elem.descricao} - ${elem.comprimento} - ${elem.largura} <br>`
+    lotes.forEach((elem, i) => {
+        const area = areaLote(elem)
+        const adicional = resultValorAdicional(elem)
+
+        divListaLotes.innerHTML += `
+            <b>Descrição:</b> ${elem.descricao} <br> 
+            <b>Comprimento:</b> ${elem.comprimento}m <br>
+            <b>Largura:</b> ${elem.largura}m (${area} m²) <br>
+            <b>Área:</b> ${areaLote(elem).toFixed(1)}m²<br>
+            <b>Valor lote:</b> R$${(areaLote(elem) * 550).toFixed(2)}<br>
+            <b>Adicional:</b> ${adicional} <br>
+            <br>
+        `
     })
 }
