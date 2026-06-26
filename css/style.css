@@ -1,0 +1,50 @@
+#geral{
+    width: 500px;
+    min-height: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    font-family: Verdana;
+}
+
+h1{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: rgb(79, 4, 150);
+}
+
+#form-lotes{
+    padding: 15px;
+    font-size: 1.0em;
+}
+
+label, input{
+    display: block;
+    margin: 10px 0;
+}
+
+input{
+    width: 230px;
+    height: 20px;
+    padding: 10px 40px 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+}
+
+label{
+    color:  rgb(79, 4, 150);
+}
+
+button{
+    border-radius: 10px;
+}
+
+#div-lista-lotes{
+    border: 2px solid #ccc;
+    width: 500px;
+    min-height: 600px;
+    margin: 20px auto;
+    padding: 10px;
+    font-family: Verdana;
+}
